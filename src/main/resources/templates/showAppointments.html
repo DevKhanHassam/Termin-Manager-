@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="appointment : ${listofAppointments}">
+            <td th:text="${appointment.time}"></td>
+            <td th:text="${appointment.booked} ? 0 : 'Available'"></td>
+            <td>
+                <!-- Button that redirects with appointment.id -->
+                <a th:href="@{/client/BookingPage/{id}(id=${appointment.id})}" 
+                   class="btn btn-sm btn-primary">
+                    Book
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

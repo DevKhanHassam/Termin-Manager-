@@ -1,8 +1,14 @@
 package com.example.demo.controller;
+import com.example.demo.entity.Appointment;
+import com.example.demo.entity.User;
 import com.example.demo.service.AppointmentService;
 import com.example.demo.service.UserService;
+
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +22,33 @@ public class ClientController {
 
     @Autowired
     private UserService userService;
-
-    @GetMapping("/available")
-    public String viewAvailableAppointments(Model model) {
-        model.addAttribute("appointments", appointmentService.getAvailableAppointments());
-        return "client/available_appointments"; // templates/client/available_appointments.html
+    
+    
+    @GetMapping("/showAppointments")
+    public String createAppointment(Model m) {
+    	
+    	List<Appointment> listofAppointments =appointmentService.getAll();
+    	m.addAttribute("listofAppointments", listofAppointments);
+    	
+        return "showAppointments"; 
     }
 
-    @PostMapping("/book/{id}")
-    public String bookAppointment(@PathVariable Long id, Authentication authentication) {
-        String email = authentication.getName();
-        appointmentService.bookAppointment(id, email);
-        return "redirect:/client/available?booked";
+    
+    
+    @GetMapping("/BookingPage/{id}")
+    public String createAppointment(@PathVariable Long id, Model m) {
+    	
+    	Optional<Appointment> appoint = appointmentService.findById(id);
+    	if(appoint.isEmpty() || appoint.get().isBooked())
+    	{
+    		return "showAppointments";
+    	}
+    	m.addAttribute(appoint);
+    	
+    	
+        return "BookingPage"; 
     }
+    
+
+    
 }

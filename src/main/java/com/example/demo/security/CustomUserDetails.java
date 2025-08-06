@@ -1,4 +1,4 @@
-package com.example.demo.security;
+/*package com.example.demo.security;
 
 import com.example.demo.entity.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,15 +17,7 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        // Assuming user.getRoles() returns a Set<Role>
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
-        return authorities;
-    }
+
 
     @Override
     public String getPassword() {
@@ -56,4 +48,13 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true; // implement if you have this logic
     }
+
+
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+*/

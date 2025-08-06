@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Optional;
+
+import javax.security.sasl.AuthenticationException;
 
 @Service
 public class UserService {
@@ -40,14 +41,31 @@ public class UserService {
     }
 
     
-    public void registerAsClient(User user) {
-        Role role = new Role();
-        role.setName("ROLE_CLIENT"); // This must match your DB roles (or seed if needed)
-        user.setRoles(Collections.singleton(role));
-        userRepository.save(user);
-    }
     
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+    
+    
+   public String userAuthenticateByEmail(User x)
+   
+   
+   
+   {
+	   Optional<User> user = userRepository.findByEmail(x.getEmail());
+	   if(user.isEmpty())
+	   {
+		   return "redirect:/public/login";
+	   }
+	   
+	   if(!(user.get().getPassword().equals(x.getPassword())))
+	   {
+		   return "redirect:/public/login";
+	   }
+			   
+	   else
+	   {
+		   return "redirect:/public/dashboard";
+	   }
+   }
 }

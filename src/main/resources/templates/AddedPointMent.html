@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div class="container">
+	<h2>Booked Appoinment!</h2>
+	<h2 th:text="'BOOKED for ' + ${a.time} + '!'">Booked for!</h2>
+    <p>This is your dashboard.</p>
+
+    <a th:href="@{/client/available}">View Available Appointments</a>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div class="container">
+    <h2>ADD APPOINMENT</h2>
+    <form th:action="@{/admin/appointments}" th:object="${appoint}" method="post">
+
+        <label for="time">time</label>
+        <input type="text" id="time" th:field="*{time}" required />
+
+   
+
+        <button type="submit">ADD</button>
+    </form>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.entity.Appointment;
 import com.example.demo.entity.User;
 import com.example.demo.repository.AppointmentRepository;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,13 @@ public class AppointmentService {
     public AppointmentService(AppointmentRepository appointmentRepository) {
         this.appointmentRepository = appointmentRepository;
     }
-
-    public List<Appointment> getAvailableAppointments() {
-        return appointmentRepository.findByBookedFalseOrderByAppointmentDateTimeAsc();
-    }
+    
+    
+    
+    public List<Appointment> getAll() {
+    return appointmentRepository.findAll();
+    	}
+   
 
     public List<Appointment> getAppointmentsByUser(User user) {
         return appointmentRepository.findByUser(user);
@@ -34,9 +36,7 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-    public boolean appointmentExists(LocalDateTime dateTime) {
-        return appointmentRepository.existsByAppointmentDateTime(dateTime);
-    }
+   
 
     public Optional<Appointment> findById(Long id) {
         return appointmentRepository.findById(id);

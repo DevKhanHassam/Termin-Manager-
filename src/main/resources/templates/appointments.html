@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+<body>
+<div class="container">
+    <h2>Available Appointments</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date & Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="appointment : ${appointments}">
+                <td th:text="${appointment.appointmentDateTime}"></td>
+                <td>
+                    <form th:action="@{'/client/book/' + ${appointment.id}}" method="post">
+                        <button type="submit">Book</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

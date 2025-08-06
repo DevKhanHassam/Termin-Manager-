@@ -1,9 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "appointments")
@@ -14,12 +13,11 @@ public class Appointment {
     private Long id;
 
     @NotNull
-    @Future
-    private LocalDateTime appointmentDateTime;
+    private String time;
 
     private boolean booked = false;
 
-    // Appointment booked by which user (nullable if not booked yet)
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -35,14 +33,18 @@ public class Appointment {
         this.id = id;
     }
 
-    public LocalDateTime getAppointmentDateTime() {
-        return appointmentDateTime;
-    }
-    public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {
-        this.appointmentDateTime = appointmentDateTime;
-    }
+    
+    
 
-    public boolean isBooked() {
+    public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public boolean isBooked() {
         return booked;
     }
     public void setBooked(boolean booked) {
