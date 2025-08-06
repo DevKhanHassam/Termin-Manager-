@@ -41,12 +41,14 @@ public class ClientController {
     	Optional<Appointment> appoint = appointmentService.findById(id);
     	if(appoint.isEmpty() || appoint.get().isBooked())
     	{
-    		return "showAppointments";
+    		return "redirect:/client/showAppointments";  //Here we can give invalid id 
     	}
-    	m.addAttribute(appoint);
+    	appoint.get().setBooked(true);
+    	appointmentService.saveAppointment(appoint.get());
+    	System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    	System.out.println(appoint.get().isBooked());
     	
-    	
-        return "BookingPage"; 
+        return "redirect:/client/showAppointments"; 
     }
     
 

@@ -9,13 +9,20 @@
     <tbody>
         <tr th:each="appointment : ${listofAppointments}">
             <td th:text="${appointment.time}"></td>
-            <td th:text="${appointment.booked} ? 0 : 'Available'"></td>
             <td>
-                <!-- Button that redirects with appointment.id -->
-                <a th:href="@{/client/BookingPage/{id}(id=${appointment.id})}" 
+                <!-- Status display -->
+                <span th:if="${appointment.booked}" class="text-danger">Booked</span>
+                <span th:if="${!appointment.booked}" class="text-success">Available</span>
+            </td>
+            <td>
+                <!-- BOOK BUTTON (only shows if available) -->
+                <a th:if="${!appointment.booked}"
+                   th:href="@{/client/BookingPage/{id}(id=${appointment.id})}" 
                    class="btn btn-sm btn-primary">
-                    Book
+                    Book Now
                 </a>
+                <!-- Optional: Show message if already booked -->
+                <span th:if="${appointment.booked}" class="text-muted">Already Booked</span>
             </td>
         </tr>
     </tbody>
