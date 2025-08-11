@@ -45,7 +45,6 @@ public class ClientController {
     	}
     	appoint.get().setBooked(true);
     	appointmentService.saveAppointment(appoint.get());
-    	System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     	System.out.println(appoint.get().isBooked());
     	
         return "redirect:/client/showAppointments"; 
