@@ -45,6 +45,8 @@ public class SecurityConfig {
 	                .anyRequest().authenticated()
 	            )
 	            .formLogin(form -> form
+	            		.loginPage("/public/login")      // URL for our HTML page
+	                    .loginProcessingUrl("/login") 
 	            		.usernameParameter("email")
 	                    .permitAll()
 	            )

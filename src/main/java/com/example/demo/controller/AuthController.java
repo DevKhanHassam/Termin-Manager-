@@ -22,6 +22,12 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    
+    @GetMapping("/login")
+    public String login()
+    {
+    	return "login";
+    }
    
 
     @GetMapping("/register")
