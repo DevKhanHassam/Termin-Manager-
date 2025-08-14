@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,20 @@ public class ClientController {
         return "redirect:/client/showAppointments"; 
     }
     
+
+    @GetMapping("/dashboard")
+    public String showDashBoard(Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    	String userEmail=auth.getName();
+    	
+    	System.out.println("EMAIL XXXXXXXXXXX  ");
+    	System.out.println(userEmail);
+    	Optional<User> user = userService.findByEmail(userEmail);
+ 
+    	model.addAttribute(user.get());
+    	
+        return "dashboard"; 
+    }
 
     
 }

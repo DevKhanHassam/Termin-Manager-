@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -12,6 +13,9 @@ import javax.security.sasl.AuthenticationException;
 
 @Service
 public class UserService {
+	
+	@Autowired
+	PasswordEncoder E;
 
     private final UserRepository userRepository;
 
@@ -33,6 +37,8 @@ public class UserService {
     }
 
     public User saveUser(User user) {
+    	
+        user.setPassword(E.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -47,7 +53,7 @@ public class UserService {
     }
     
     
-   public String userAuthenticateByEmail(User x)
+   public String userAuthenticateByEmailandPwd(User x)
    
    
    
